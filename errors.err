@@ -1,0 +1,10 @@
+ex4.c: In function ‘main’:
+ex4.c:15:5: warning: implicit declaration of function ‘srand’ [-Wimplicit-function-declaration]
+     srand(time(NULL));
+     ^
+ex4.c:25:13: warning: implicit declaration of function ‘rand’ [-Wimplicit-function-declaration]
+             aux = (66 + rand()%(91-66));
+             ^
+ex4.c:11:10: warning: unused variable ‘listanumeros’ [-Wunused-variable]
+     char listanumeros[QNTPESSOAS][TAMCEL];
+          ^
