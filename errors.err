@@ -1,7 +1,12 @@
 ex4.c: In function ‘main’:
-ex4.c:14:5: warning: implicit declaration of function ‘srand’ [-Wimplicit-function-declaration]
+ex4.c:17:5: warning: implicit declaration of function ‘srand’ [-Wimplicit-function-declaration]
      srand(time(NULL));
      ^
-ex4.c:28:17: warning: implicit declaration of function ‘rand’ [-Wimplicit-function-declaration]
+ex4.c:33:17: warning: implicit declaration of function ‘rand’ [-Wimplicit-function-declaration]
                  aux = (97 + rand()%(123-97));
                  ^
+ex4.c:64:5: warning: ‘gets’ is deprecated (declared at /usr/include/stdio.h:638) [-Wdeprecated-declarations]
+     gets(nomeaux); // pedindo o nome ao usuario.
+     ^
+/tmp/ccbcniL0.o: In function `main':
+/home/jppra/discreta/rascunhos/ExerciciosMatDiscreta/ex4.c:64: warning: the `gets' function is dangerous and should not be used.
