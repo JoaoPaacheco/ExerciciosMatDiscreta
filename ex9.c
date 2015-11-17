@@ -5,6 +5,24 @@
 
 int result[max][max], mat1[max][max], mat2[max][max];
 
+void* preencher(void *z, void *y)
+{
+    int *x = (int *) z;
+    int limitesup = *x;
+    int *f = (int *) y;
+    int limiteinf = *f;
+    int i,s;
+    for(i = limiteinf; i< limitesup; i++)
+    {
+        for (s = 0; s < max ; s++)
+        {
+            mat1[i][s] = 1;
+            mat2[i][s] = 2;
+        }
+    }
+    pthread_exit(0);
+}
+
 void* mult(void *z, void *y)
 {
     int *x = (int *) z;
