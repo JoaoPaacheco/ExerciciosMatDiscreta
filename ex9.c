@@ -1,20 +1,51 @@
 #include<stdio.h>
+#include<stdlib.h>
 #include<pthread.h>
 
 #define max 1000
 
-int result[max][max], mat1[max][max], mat2[max][max];
+int result[max][max], mat1[max][max], mat2[max][max], numthread = 1;
 
-void* preencher(void *z, void *y)
+void *preencher(void *z);
+
+void* mult(void *z);
+
+int main(void)
 {
-    int *x = (int *) z;
-    int limitesup = *x;
-    int *f = (int *) y;
-    int limiteinf = *f;
-    int i,s;
-    for(i = limiteinf; i< limitesup; i++)
+    int i;
+    pthread_t tid[max];
+    
+    while(numthread<max)
     {
-        for (s = 0; s < max ; s++)
+        printf("Numero de threads: %d.\n", numthread);
+        for(i=1; i<=numthread; i++)
+        {
+            pthread_create(&tid[i], NULL, preencher, (void*) &i);
+        }
+        for(i=1; i<=numthread; i++)
+        {
+            pthread_join(tid[i], NULL);
+        }
+        for(i=1; i<=numthread; i++)
+        {
+            pthread_create(&tid[i], NULL, mult, (void*) &i);
+        }
+        for(i=1; i<=numthread; i++)
+        {
+            pthread_join(tid[i], NULL);
+        }
+        numthread++;
+    }
+    return 0;
+}
+
+void *preencher(void *x)
+{
+    int qtd = *((int *) x);
+    int i,s;
+    for(i = ((qtd-1)*(max/numthread)); i<(qtd*(max/numthread)); i++)
+    {
+        for (s=0; s<max ; s++)
         {
             mat1[i][s] = 1;
             mat2[i][s] = 2;
@@ -23,19 +54,16 @@ void* preencher(void *z, void *y)
     pthread_exit(0);
 }
 
-void* mult(void *z, void *y)
+void *mult(void *x)
 {
-    int *x = (int *) z;
-    int limitesup = *x;
-    int *f = (int *) y;
-    int limiteinf = *f;
-    int i, s, a;
-    for(i = limiteinf; i < limitesup; i++)
+    int qtd = *((int *) x);
+    int i,s,a;
+    for(i = ((qtd-1)*(max/numthread)); i<(qtd*(max/numthread)); i++)
     {
         for (s = 0; s < max ; s++)
         {
             a = 0;
-            while (a < max)
+            while (a<max)
             {
                 result[i][s] += mat1[i][a] * mat2[a][s];
                 a++;
@@ -45,7 +73,3 @@ void* mult(void *z, void *y)
     pthread_exit(0);
 }
 
-int main(void)
-{
-    return 0;
-}

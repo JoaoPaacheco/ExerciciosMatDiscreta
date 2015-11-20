@@ -12,15 +12,6 @@ int main(void)
     ul1.pt1 = 0;
     ul1.pt2 = 0;
     
-    /*printf("tamanho: %lx.\n",sizeof(ul1.pt1));
-    printf("valor: %lx.\n",ul1.pt1);
-    ul1.pt1--;
-    printf("valor: %lx.\n", ul1.pt1);
-    ul1.pt1++;
-    printf("valor: %lx.\n", ul1.pt1);
-    Esta parte do codigo foi feita para confirmar que a variavel tem
-    o tamanho de oito bytes, que sua representacao hexadecimal e 0x'acompanha 16 letras/numeros'
-    e a comprovacao do overflow.*/
 
    while(ul1.pt1 != 0xFFFFFFFFFFFFFFFF && ul1.pt2 != 0xFFFFFFFFFFFFFFFF) /*condicao ira rodar ate que as duas variaveis estejam completamente cheias.*/
     {
@@ -36,4 +27,12 @@ int main(void)
    printf("Criado tipo com capacidade para 16 bytes de armazenamento.\n");
     
    return 0;
+}
+
+ullong somar(ullong x, ullong y)
+{
+    ullong aux;
+    aux.pt1 = 0;
+    while(x.pt1 && x.pt2 != 0)
+
 }

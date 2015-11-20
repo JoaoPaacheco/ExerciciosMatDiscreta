@@ -1,4 +1,4 @@
-#include<stdio.h>
+#include/* aqui espaco */<stdio.h>
 
 typedef struct st_lista
 {
