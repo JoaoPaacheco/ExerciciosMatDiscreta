@@ -1,7 +1,0 @@
-ex4.c: In function ‘main’:
-ex4.c:29:13: warning: statement with no effect [-Wunused-value]
-             chavesutilizadas[chave] == 1;
-             ^
-ex4.c:18:10: warning: unused variable ‘listanumeros’ [-Wunused-variable]
-     char listanumeros[QTDPESSOAS][TAMCEL]; /*lista com chave e numero*/
-          ^

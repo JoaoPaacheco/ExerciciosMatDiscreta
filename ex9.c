@@ -14,26 +14,22 @@ int main(void)
 {
     int i;
     pthread_t tid[max];
-    
+    time_t inicio, fim;
+
+
     while(numthread<max)
     {
-        printf("Numero de threads: %d.\n", numthread);
+        time(&inicio);
         for(i=1; i<=numthread; i++)
-        {
             pthread_create(&tid[i], NULL, preencher, (void*) &i);
-        }
         for(i=1; i<=numthread; i++)
-        {
             pthread_join(tid[i], NULL);
-        }
         for(i=1; i<=numthread; i++)
-        {
             pthread_create(&tid[i], NULL, mult, (void*) &i);
-        }
         for(i=1; i<=numthread; i++)
-        {
             pthread_join(tid[i], NULL);
-        }
+        time(&fim);
+        printf("Utilizando %d threads o a multiplicacao demorou: %g segundos.\n", numthread, difftime(fim,inicio));
         numthread++;
     }
     return 0;
