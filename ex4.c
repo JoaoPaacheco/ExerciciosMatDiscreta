@@ -5,13 +5,13 @@
 
 #define QTDPESSOAS 15 /*define a quantidade de pessoas da tabela*/
 #define TAMNOME 15 /*define o tamanho maximo dos nomes. OBS: o nome real tem o nome inferior deste valor - 1*/
-#define TAMCEL 12 /*define o tamanho dos telefenos celulares de acordo com o padrao do DDD 81 ex: xxxxx-xxxx*/
+#define TAMCEL 11 /*define o tamanho dos telefenos celulares de acordo com o padrao do DDD 81 ex: xxxxx-xxxx*/
 #define QTDCHAVES 10 /*numero de chaves que podem ser utilizadas, para efeito de colisoes o numero sera menor que QTDPESSOAS*/
 
 char *geranome(char m[TAMNOME]);
 char *geranumero(char m[TAMCEL]);
 int hashing(char mn[TAMNOME]);
-void imprimir(char mn[QTDPESSOAS][TAMNOME], char mc[QTDPESSOAS][TAMCEL]);
+void imprimir(char mn[QTDPESSOAS][TAMNOME], int chaves[QTDCHAVES], int numc);
 
 int main(void)
 {
@@ -35,28 +35,41 @@ int main(void)
         {
             printf("Colisao! Posicionando nome em outra posicao.\n");
             chave = QTDCHAVES + numcolisoes;
-            chave = QTDCHAVES + numcolisoes;
             strcpy(listanomes[chave], aux1);
-            if(numcolisoes <= 5)
+            if(numcolisoes < 5)
                 numcolisoes++;
             strcpy(listanumeros[chave], geranumero(aux2));
         }
     }
 
-    imprimir(listanomes, listanumeros);
-
+    imprimir(listanomes, chavesutilizadas, numcolisoes);
     /*TODO: solicitar nome e imprimir o mesmo.*/
+    printf("Por favor, digite o nome desejado: ");
+    scanf("%s", aux1);
+    /*fgets(aux1, TAMNOME+1, stdin);*/
+    chave = hashing(aux1);
+
+    if(strncmp(aux1, listanomes[chave], TAMNOME))
+        printf("O numero de telefone desta pessoa e: %s.\n", listanumeros[chave]);
+    else
+        for(chave=QTDPESSOAS; chave<(QTDPESSOAS+numcolisoes); chave++)
+        {
+            if(strncmp(aux1, listanomes[chave],TAMNOME))
+                printf("O numero de telefone desta pessoa e: %s.\n", listanumeros[chave]);
+        }
 
     return 0;
 }   
 
-void imprimir(char mn[QTDPESSOAS][TAMNOME], char mc[QTDPESSOAS][TAMCEL])
+void imprimir(char mn[QTDPESSOAS][TAMNOME], int chaves[QTDCHAVES], int numc)
 {
     int i;
-    for(i=0; i<QTDPESSOAS ;i++)
-        printf("Nome: %s. Numero: %s.\n", mn[i], mc[i]);
+    for(i=0; i<QTDCHAVES; i++)
+        if(chaves[i] == 1)
+            printf("Nome: %s.\n", mn[i]);
+    for(i=QTDCHAVES; i<(QTDCHAVES+numc); i++)
+        printf("Nome: %s.\n", mn[i]);
 }
-
 
 int hashing(char mn[TAMNOME])   /*funcao que recebe um nome e retorna sua chave*/
 {
@@ -98,7 +111,7 @@ char *geranome(char m[TAMNOME]) /*funcao para gerar nomes plausiveis*/
 char *geranumero(char m[TAMCEL])
 {
     int i=0;
-    for(; i<TAMCEL-2; i++)
+    for(; i<TAMCEL-1; i++)
     {
         switch(i)
         {
