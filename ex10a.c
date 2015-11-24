@@ -2,28 +2,30 @@
 #include <stdlib.h>
 #include <time.h>
 
-void gerasenha(char v[7]);
-void imprimecombinacoes(char v[7]);
+#define tamsenha 6
+
+void gerasenha(int v[tamsenha]);
+void imprimecombinacoes(int v[tamsenha]);
+void imprime_senha(int v[tamsenha]);
 
 int main(void)
 {
     srand(time(NULL));
-    char senha[7];
+    int senha[tamsenha];
     gerasenha(senha);
     imprimecombinacoes(senha);
-    /*printf("A senha e: %s.\n",senha);*/ /*Linha para debug*/
+    /*imprime_senha(senha); codigo para debug*/
     return 0;
 }
 
-void gerasenha(char v[7]) /*funcao que gera a senha*/
+void gerasenha(int v[tamsenha]) /*funcao que gera a senha*/
 {
     int i = 0;
-    for(; i<6; i++)
-        v[i]=(char) (48+rand()%10);
-    v[6]= '\0';
+    for(; i<tamsenha; i++)
+        v[i]=rand()%10;
 }
 
-void imprimecombinacoes(char v[7]) /*Funcao que imprime as combinacoes*/
+void imprimecombinacoes(int v[tamsenha]) /*Funcao que imprime as combinacoes*/
 {
     int i, j, k, cont = 0;
     while(cont<50)
@@ -35,7 +37,16 @@ void imprimecombinacoes(char v[7]) /*Funcao que imprime as combinacoes*/
             j = rand()%5; /*Portanto, pode-se retirar os numeros que as variaveis nunca irao poder assumir.*/
             k = rand()%6;
         }
-        printf("%c%c%c\n",v[i],v[j],v[k]);
+        printf("%d%d%d\n",v[i],v[j],v[k]);
         cont++;
     }
+}
+
+void imprime_senha(int v[tamsenha])
+{
+    int i = 0;
+    printf("A senha e: ");
+    for(; i<tamsenha; i++)
+        printf("%d", v[i]);
+    printf("\n");
 }
