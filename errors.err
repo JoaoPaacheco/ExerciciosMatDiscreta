@@ -1,3 +1,0 @@
-/tmp/ccnhT5G2.o: In function `func':
-/home/jppra/discreta/rascunhos/ExerciciosMatDiscreta/ex8.c:128: undefined reference to `sqrt'
-collect2: error: ld returned 1 exit status
