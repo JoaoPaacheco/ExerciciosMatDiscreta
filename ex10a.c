@@ -14,7 +14,7 @@ int main(void)
     int senha[tamsenha];
     gerasenha(senha);
     imprimecombinacoes(senha);
-    /*imprime_senha(senha); codigo para debug*/
+    /*imprime_senha(senha); debug*/
     return 0;
 }
 
@@ -37,7 +37,7 @@ void imprimecombinacoes(int v[tamsenha]) /*Funcao que imprime as combinacoes*/
             j = rand()%5; /*Portanto, pode-se retirar os numeros que as variaveis nunca irao poder assumir.*/
             k = rand()%6;
         }
-        printf("%d%d%d\n",v[i],v[j],v[k]);
+        printf("%d %d %d\n",v[i],v[j],v[k]);
         cont++;
     }
 }
@@ -47,6 +47,6 @@ void imprime_senha(int v[tamsenha])
     int i = 0;
     printf("A senha e: ");
     for(; i<tamsenha; i++)
-        printf("%d", v[i]);
+        printf("%d ", v[i]);
     printf("\n");
 }
